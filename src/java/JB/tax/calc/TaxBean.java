@@ -80,6 +80,8 @@ public class TaxBean {
     
      public double getMedicalAidCredit(){
        double medi =0; 
+       if(medicalaid =='n')
+           return 0;
         if (year == 2017) {
             medi = getMedicalAidCredit2017();
         } else {
@@ -95,7 +97,7 @@ public class TaxBean {
         
         
         if (monthannn == 'm') {
-            salary = salary * 12;
+            this.salary = salary * 12;
         }
         if(age <65&& salary<75000){
             return 0;
@@ -130,15 +132,17 @@ public class TaxBean {
     }
     
     private double getMedicalAidCredit2017(){
-       double medi =0; 
-       
+       double medi =286; 
+       if(medidep >0){
+           medi += 286 + (medidep-1)*192;
+       }
        return medi;
     }
 
     private double getTax2018() {
         double tax = 0;
         if (monthannn == 'm') {
-            salary = salary * 12;
+            this.salary = salary * 12;
         }
          if(age <65&& salary<75750){
             return 0;
@@ -174,10 +178,26 @@ public class TaxBean {
     }
     
      private double getMedicalAidCredit2018(){
-       double medi =0; 
-       
+       double medi =303; 
+        if(medidep >0){
+           medi += 303 + (medidep-1)*204;
+       }
        return medi;
     }
+     public double getMontlyTax(){
+         return getTax()/12;
+     }
+     public double getMonthlySalary(){
+         return salary /12;
+     }
+     
+      public double getNetTax(){
+         return getMontlyTax() -getMedicalaid();
+     }
+      
+     public double getNetSalary(){
+          return getMonthlySalary()-getNetTax();
+     }
 
 
 }

@@ -20,14 +20,24 @@
         <jsp:setProperty name="person" property="salary" />
         <jsp:setProperty name="person" property="medicalaid"  />
         <jsp:setProperty name="person" property="medidep"  />
-        
+
         <jsp:getProperty name="person" property="year" /><br/>
         <jsp:getProperty name="person" property="age" /><br/>
         <jsp:getProperty name="person" property="monthannn" /><br/>
         <jsp:getProperty name="person" property="salary" /><br/>
         <jsp:getProperty name="person" property="medicalaid" /><br/>
-        <jsp:getProperty name="person" property="medidep" />
-           <jsp:getProperty name="person" property="tax" />
+        <jsp:getProperty name="person" property="medidep" /><br/>
+        <jsp:getProperty name="person" property="tax" /><br/>
+        <jsp:getProperty name="person" property="medicalAidCredit" />
+        <br/>
+        <jsp:getProperty name="person" property="monthlySalary" />
+        <br/>
+        <jsp:getProperty name="person" property="montlyTax" />
+        <br/>
+        <jsp:getProperty name="person" property="netTax" />
+        <br/>
+        <jsp:getProperty name="person" property="netSalary" />
+
         <a href="../index.jsp">Back</a>
     </body>
 </html>
