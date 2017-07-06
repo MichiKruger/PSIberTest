@@ -9,7 +9,7 @@ package JB.tax.calc;
  *
  * @author Michi
  */
-public class Person {
+public class TaxBean {
     private int year;
     private int age;
     private char monthannn;
