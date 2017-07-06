@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Bean Test</h1>
-        <jsp:useBean id="person" scope="session" class="JB.tax.calc.Person" />
+        <jsp:useBean id="person" scope="session" class="JB.tax.calc.TaxBean" />
         <jsp:setProperty name="person" property="year"  />
         <jsp:setProperty name="person" property="age"  />
         <jsp:setProperty name="person" property="monthannn"  />
@@ -27,6 +27,7 @@
         <jsp:getProperty name="person" property="salary" /><br/>
         <jsp:getProperty name="person" property="medicalaid" /><br/>
         <jsp:getProperty name="person" property="medidep" />
+           <jsp:getProperty name="person" property="tax" />
         <a href="../index.jsp">Back</a>
     </body>
 </html>
