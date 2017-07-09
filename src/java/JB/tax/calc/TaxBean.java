@@ -1,4 +1,4 @@
-/*
+/*                                                              
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -17,6 +17,8 @@ public class TaxBean {
     private double salary;
     private char medicalaid;
     private int medidep;
+    private double tax;
+    private double medicalAidCredit;
 
     public int getYear() {
         return year;
@@ -43,6 +45,9 @@ public class TaxBean {
     }
 
     public double getSalary() {
+        if (monthannn == 'm') {
+            return salary * 12;
+        }
         return salary;
     }
 
@@ -66,138 +71,148 @@ public class TaxBean {
         this.medidep = medidep;
     }
 
-    public double getTax() {
-        double tax = 0;
+    public void calcTax() {
 
         if (year == 2017) {
-            tax = getTax2017();
+            this.tax = calcTax2017();
         } else {
-            tax = getTax2018();
+            this.tax = calcTax2018();
         }
 
-        return tax;
     }
-    
-     public double getMedicalAidCredit(){
-       double medi =0; 
-       if(medicalaid =='n')
-           return 0;
+
+    public void calcMedicalAidCredit() {
+
+        if (medicalaid == 'n') {
+            this.medicalAidCredit = 0;
+        }
         if (year == 2017) {
-            medi = getMedicalAidCredit2017();
+            this.medicalAidCredit = calcMedicalAidCredit2017();
         } else {
-            medi = getMedicalAidCredit2018();
+            this.medicalAidCredit = calcMedicalAidCredit2018();
         }
-       return medi;
     }
 
-
-    private double getTax2017() {
+    private double calcTax2017() {
         double tax = 0;
-        
-        
-        
-        if (monthannn == 'm') {
-            this.salary = salary * 12;
-        }
-        if(age <65&& salary<75000){
+
+        double sal = getSalary();
+        if (age < 65 && sal < 75000) {
             return 0;
-        }else if (age >=65&&age<75&& salary<116150){
+        } else if (age >= 65 && age < 75 && sal < 116150) {
             return 0;
-        }else if (age >=7&& salary<129850){
+        } else if (age >= 7 && sal < 129850) {
             return 0;
         }
-        
-        if (salary <= 188000) {
-            tax = salary * 0.18;
-        } else if (salary >= 188001 && salary <= 293600) {
-            tax = (salary - 188000) * 0.26 + 33840;
-        } else if (salary >= 293601 && salary <= 406400) {
-            tax = (salary - 293600) * 0.31 + 61296;
-        } else if (salary >= 406401 && salary <= 550100) {
-            tax = (salary - 406400) * 0.36 + 96264;
-        } else if (salary >= 550101 && salary <= 701300) {
-            tax = (salary - 550100) * 0.39 + 147996;
-        } else if (salary >= 701301) {
-            tax = (salary - 701300) * 0.41 + 206964;
+
+        if (sal <= 188000) {
+            tax = sal * 0.18;
+        } else if (sal >= 188001 && sal <= 293600) {
+            tax = (sal - 188000) * 0.26 + 33840;
+        } else if (sal >= 293601 && sal <= 406400) {
+            tax = (sal - 293600) * 0.31 + 61296;
+        } else if (sal >= 406401 && sal <= 550100) {
+            tax = (sal - 406400) * 0.36 + 96264;
+        } else if (sal >= 550101 && sal <= 701300) {
+            tax = (sal - 550100) * 0.39 + 147996;
+        } else if (sal >= 701301) {
+            tax = (sal - 701300) * 0.41 + 206964;
         }
         tax -= 13500;
-        if (age >=65){
-             tax -= 7407;
+        if (age >= 65) {
+            tax -= 7407;
         }
-        if (age >=75){
-             tax -= 2466;
+        if (age >= 75) {
+            tax -= 2466;
         }
-                        
+
         return tax;
     }
-    
-    private double getMedicalAidCredit2017(){
-       double medi =286; 
-       if(medidep >0){
-           medi += 286 + (medidep-1)*192;
-       }
-       return medi;
+
+    private double calcMedicalAidCredit2017() {
+        double medi = 286;
+        if (medidep > 0) {
+            medi += 286 + (medidep - 1) * 192;
+        }
+        return medi;
     }
 
-    private double getTax2018() {
+    private double calcTax2018() {
         double tax = 0;
-        if (monthannn == 'm') {
-            this.salary = salary * 12;
-        }
-         if(age <65&& salary<75750){
+        double sal = getSalary();
+        if (age < 65 && sal < 75750) {
             return 0;
-        }else if (age >=65&&age<75&& salary<117300){
+        } else if (age >= 65 && age < 75 && sal < 117300) {
             return 0;
-        }else if (age >=7&& salary<131150){
+        } else if (age >= 7 && sal < 131150) {
             return 0;
         }
-        
-        if (salary <= 188000) {
-            tax = salary * 0.18;
-        } else if (salary >= 188001 && salary <= 296540) {
-            tax = (salary - 189880) * 0.26 + 34178;
-        } else if (salary >= 296541 && salary <= 410460) {
-            tax = (salary - 296540) * 0.31 + 61910;
-        } else if (salary >= 410461 && salary <= 555600) {
-            tax = (salary - 410460) * 0.36 + 97225;
-        } else if (salary >= 555601 && salary <= 708310) {
-            tax = (salary - 708310) * 0.39 + 209042;
-        } else if (salary >= 708311 && salary <= 15000000) {
-            tax = (salary - 708310) * 0.41 + 209032;
-        } else if (salary >= 1500001) {
-            tax = (salary - 15000000) * 0.45 + 533625;
+
+        if (sal <= 188000) {
+            tax = sal * 0.18;
+        } else if (sal >= 188001 && sal <= 296540) {
+            tax = (sal - 189880) * 0.26 + 34178;
+        } else if (sal >= 296541 && sal <= 410460) {
+            tax = (sal - 296540) * 0.31 + 61910;
+        } else if (sal >= 410461 && sal <= 555600) {
+            tax = (sal - 410460) * 0.36 + 97225;
+        } else if (sal >= 555601 && sal <= 708310) {
+            tax = (sal - 708310) * 0.39 + 209042;
+        } else if (sal >= 708311 && sal <= 15000000) {
+            tax = (sal - 708310) * 0.41 + 209032;
+        } else if (sal >= 1500001) {
+            tax = (sal - 15000000) * 0.45 + 533625;
         }
         tax -= 13635;
-        if (age >=65){
-             tax -= 7479;
+        if (age >= 65) {
+            tax -= 7479;
         }
-        if (age >=75){
-             tax -= 2493;
+        if (age >= 75) {
+            tax -= 2493;
         }
         return tax;
     }
-    
-     private double getMedicalAidCredit2018(){
-       double medi =303; 
-        if(medidep >0){
-           medi += 303 + (medidep-1)*204;
-       }
-       return medi;
-    }
-     public double getMontlyTax(){
-         return getTax()/12;
-     }
-     public double getMonthlySalary(){
-         return salary /12;
-     }
-     
-      public double getNetTax(){
-         return getMontlyTax() -getMedicalaid();
-     }
-      
-     public double getNetSalary(){
-          return getMonthlySalary()-getNetTax();
-     }
 
+    private double calcMedicalAidCredit2018() {
+        double medi = 303;
+        if (medidep > 0) {
+            medi += 303 + (medidep - 1) * 204;
+        }
+        return medi;
+    }
+
+    public double getMontlyTax() {
+        return tax / 12;
+    }
+
+    public double getMonthlySalary() {
+        if (monthannn == 'm') {
+            return salary;
+        } else {
+            return salary / 12;
+        }
+    }
+
+    public double getNetTax() {
+        return getMontlyTax() - getMedicalaid();
+    }
+
+    public double getNetSalary() {
+        return getMonthlySalary() - getNetTax();
+    }
+
+    public double getTax() {
+        return tax;
+    }
+
+    public double getMedicalAidCredit() {
+        return medicalAidCredit;
+    }
+    
+    public String getCalc(){
+       calcMedicalAidCredit();
+       calcTax();
+        return "";
+    }
 
 }
