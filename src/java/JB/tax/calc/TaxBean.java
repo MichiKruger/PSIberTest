@@ -58,6 +58,13 @@ public class TaxBean {
     public char getMedicalaid() {
         return medicalaid;
     }
+     public String getMedicalaidExt() {
+         if(medicalaid=='y'){
+             return "Yes";
+         }else {
+             return "No";
+         }
+    }
 
     public void setMedicalaid(char medicalaid) {
         this.medicalaid = medicalaid;
@@ -90,6 +97,10 @@ public class TaxBean {
             this.medicalAidCredit = calcMedicalAidCredit2017();
         } else {
             this.medicalAidCredit = calcMedicalAidCredit2018();
+        }
+
+        if (tax == 0) {
+            this.medicalAidCredit = 0;
         }
     }
 
@@ -182,19 +193,19 @@ public class TaxBean {
     }
 
     public double getMontlyTax() {
-        return tax / 12;
+        return (double) Math.round((tax / 12) * 100) / 100;
     }
 
     public double getMonthlySalary() {
         if (monthannn == 'm') {
             return salary;
         } else {
-            return salary / 12;
+            return (double) Math.round((salary / 12) * 100) / 100;
         }
     }
 
     public double getNetTax() {
-        return getMontlyTax() - getMedicalaid();
+        return getMontlyTax() - getMedicalAidCredit();
     }
 
     public double getNetSalary() {
@@ -202,16 +213,17 @@ public class TaxBean {
     }
 
     public double getTax() {
-        return tax;
+        return (double) Math.round((tax) * 100) / 100;
     }
 
     public double getMedicalAidCredit() {
         return medicalAidCredit;
     }
-    
-    public String getCalc(){
-       calcMedicalAidCredit();
-       calcTax();
+
+    public String getCalc() {
+        calcTax();
+        calcMedicalAidCredit();
+
         return "";
     }
 
