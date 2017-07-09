@@ -25,6 +25,19 @@
             padding-left: 120px;
         }
     </style>
+    <script>
+        function zeroOut(selectObj) {
+
+            if (selectObj.options[selectObj.selectedIndex].value == "n") {
+
+                document.getElementById("dep").value = "0";
+                document.getElementById("dep").disabled = true;
+            } else if (selectObj.options[selectObj.selectedIndex].value == "y") {
+                document.getElementById("dep").disabled = false;
+            }
+
+        }
+    </script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tax Calculator</title>
@@ -61,14 +74,16 @@
                         </tr>
                         <tr>
                             <th align="left">Medical Aid:</th>
-                            <td  class="pad"><select name="medicalaid" >
-                                    <option value="y">Yes</option>
+                            <td  class="pad">
+                                <select id="med" name="medicalaid" onchange="zeroOut(this);">
                                     <option value="n">No</option>
+                                    <option value="y">Yes</option>
                                 </select></td>
                         </tr>
                         <tr>
                             <th align="left">Number of dependants :</th>
-                            <td colspan="2" class="pad"><input type="text" name="medidep"  value="0" /></td>
+                            <td colspan="2" class="pad">
+                                <input id="dep" type="text" name="medidep"  value="0" disabled="true" /></td>
                         </tr>
                         <tr>
                             <td> <input type="submit" value="OK" /></td>
@@ -82,4 +97,7 @@
         </div>
 
     </body>
+
+
+
 </html>
