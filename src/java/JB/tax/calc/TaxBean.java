@@ -58,12 +58,13 @@ public class TaxBean {
     public char getMedicalaid() {
         return medicalaid;
     }
-     public String getMedicalaidExt() {
-         if(medicalaid=='y'){
-             return "Yes";
-         }else {
-             return "No";
-         }
+
+    public String getMedicalaidExt() {
+        if (medicalaid == 'y') {
+            return "Yes";
+        } else {
+            return "No";
+        }
     }
 
     public void setMedicalaid(char medicalaid) {
@@ -92,8 +93,7 @@ public class TaxBean {
 
         if (medicalaid == 'n') {
             this.medicalAidCredit = 0;
-        }
-        if (year == 2017) {
+        } else if (year == 2017) {
             this.medicalAidCredit = calcMedicalAidCredit2017();
         } else {
             this.medicalAidCredit = calcMedicalAidCredit2018();
